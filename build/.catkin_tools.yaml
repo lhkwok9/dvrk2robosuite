@@ -1,0 +1,6 @@
+devel_space: /home/jk/dvrk2robosuite/devel
+install: false
+install_space: /home/jk/dvrk2robosuite/install
+profile: default
+source_space: /home/jk/dvrk2robosuite/src
+workspace: /home/jk/dvrk2robosuite
