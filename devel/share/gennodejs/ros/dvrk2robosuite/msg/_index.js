@@ -1,0 +1,1 @@
+/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/gennodejs/ros/dvrk2robosuite/msg/_index.js
