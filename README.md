@@ -1,5 +1,11 @@
 # dvrk2robosuite
 
+## Prerequisite
+Ubuntu 20.04
+[Robosuite](https://robosuite.ai/docs/installation.html)
+[ROS desktop-full](http://wiki.ros.org/noetic/Installation/Ubuntu)
+[catkin_tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) (for catkin build)  
+
 ## For each terminal  
 conda activate robosuite  
 roscd dvrk2robosuite/    
