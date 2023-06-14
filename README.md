@@ -4,6 +4,7 @@ conda activate robosuite
 roscore
 roscd dvrk2robosuite/
 source devel/setup.bash
+rosrun dvrk2robosuite ros_keyboard.py
 
 
 

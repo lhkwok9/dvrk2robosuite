@@ -11,7 +11,7 @@ def MTMLcallback(data):
     MTMLaction = [data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper]
 
 def MTMLlistener():
-    rospy.init_node('MTMLlistener', anonymous=False)
+    # rospy.init_node('MTMLlistener', anonymous=False)
 
     rospy.Subscriber("MTML/measured_cp", measured_cp, MTMLcallback)
     # rospy.Subscriber("MTMR/measured_cp", measured_cp, callback)
@@ -25,7 +25,7 @@ def MTMRcallback(data):
     MTMRaction = [data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper]
 
 def MTMRlistener():
-    rospy.init_node('MTMRlistener', anonymous=False)
+    # rospy.init_node('MTMRlistener', anonymous=False)
 
     rospy.Subscriber("MTMR/measured_cp", measured_cp, MTMRcallback)
     # rospy.Subscriber("MTMR/measured_cp", measured_cp, callback)
@@ -62,10 +62,11 @@ if __name__ == "__main__":
     # print(low, high)
 
     # start listening to ROS cmd
+    rospy.init_node('DVRKlistener', anonymous=False)
     MTMLaction = np.zeros(env.robots[0].dof)
     MTMRaction = np.zeros(env.robots[1].dof)
     MTMLlistener()
-    # MTMRlistener()
+    MTMRlistener()
 
     # print(env.robots[1].dof)
 
