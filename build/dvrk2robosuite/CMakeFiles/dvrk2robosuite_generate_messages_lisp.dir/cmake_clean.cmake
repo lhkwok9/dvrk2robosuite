@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/common-lisp/ros/dvrk2robosuite/msg/measured_cp.lisp"
+  "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/common-lisp/ros/dvrk2robosuite/msg/measured_js.lisp"
   "CMakeFiles/dvrk2robosuite_generate_messages_lisp"
 )
 

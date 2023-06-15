@@ -1,37 +1,40 @@
 #!/usr/bin/env python
 import numpy as np
 import rospy
-from dvrk2robosuite.msg import measured_cp
+from dvrk2robosuite.msg import measured_js
 import robosuite as suite
 from robosuite import load_controller_config
 
 def MTMLcallback(data):
     global MTMLaction
-    # rospy.loginfo(rospy.get_caller_id() + " L arm: %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf", data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper)
-    MTMLaction = [data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper]
+    for i in range(7):
+        MTMLaction[i] = data.velocity[i]
 
 def MTMLlistener():
-    # rospy.init_node('MTMLlistener', anonymous=False)
+    rospy.Subscriber("MTML/measured_js", measured_js, MTMLcallback)
 
-    rospy.Subscriber("MTML/measured_cp", measured_cp, MTMLcallback)
-    # rospy.Subscriber("MTMR/measured_cp", measured_cp, callback)
+def MTMLGrippercallback(data):
+    global MTMLaction
+    MTMLaction[-1] = data.velocity[0]
 
-    # spin() simply keeps python from exiting until this node is stopped
-    # rospy.spin()
+def MTMLGripperlistener():
+    rospy.Subscriber("MTML/gripper/measured_js", measured_js, MTMLGrippercallback)
 
 def MTMRcallback(data):
     global MTMRaction
-    # rospy.loginfo(rospy.get_caller_id() + " R arm: %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf", data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper)
-    MTMRaction = [data.a, data.b, data.c, data.d, data.e, data.f, data.g, data.gripper]
+    for i in range(7):
+        MTMRaction[i] = data.velocity[i]
 
 def MTMRlistener():
-    # rospy.init_node('MTMRlistener', anonymous=False)
+    rospy.Subscriber("MTMR/measured_js", measured_js, MTMRcallback)
 
-    rospy.Subscriber("MTMR/measured_cp", measured_cp, MTMRcallback)
-    # rospy.Subscriber("MTMR/measured_cp", measured_cp, callback)
+def MTMRGrippercallback(data):
+    global MTMRaction
+    MTMRaction[-1] = data.velocity[0]
 
-    # spin() simply keeps python from exiting until this node is stopped
-    # rospy.spin()
+def MTMRGripperlistener():
+    rospy.Subscriber("MTMR/gripper/measured_js", measured_js, MTMRGrippercallback)
+
 
 if __name__ == "__main__":
 
@@ -67,11 +70,13 @@ if __name__ == "__main__":
     MTMRaction = np.zeros(env.robots[1].dof)
     MTMLlistener()
     MTMRlistener()
+    MTMLGripperlistener()
+    MTMRGripperlistener()
 
     # print(env.robots[1].dof)
 
     # do visualization
-    while True:
+    for i in range(3000):
         action = np.append(MTMLaction, MTMRaction)
         print(action)
         _, _, _, _ = env.step(action)

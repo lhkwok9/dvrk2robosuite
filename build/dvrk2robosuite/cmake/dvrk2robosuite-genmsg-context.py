@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_cp.msg"
+messages_str = "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_js.msg"
 services_str = ""
 pkg_name = "dvrk2robosuite"
 dependencies_str = "std_msgs"

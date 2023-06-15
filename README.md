@@ -8,7 +8,6 @@ Ubuntu 20.04
 
 ## For each terminal  
 conda activate robosuite  
-roscd dvrk2robosuite/    
 source devel/setup.bash  
 
 ## First terminal  
@@ -18,9 +17,15 @@ roscore
 rosrun dvrk2robosuite ros_keyboard.py  
 
 ## Third terminal (Example cmd)
-rostopic pub -r 20 /MTML/measured_cp dvrk2robosuite/measured_cp 0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
-rostopic pub -1 /MTMR/measured_cp dvrk2robosuite/measured_cp -- -0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+rostopic pub -r 20 /MTML/measured_js dvrk2robosuite/measured_js 0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+rostopic pub -1 /MTMR/measured_js dvrk2robosuite/measured_js -- -0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+
+rostopic pub -1 /MTML/measured_js dvrk2robosuite/measured_js '{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}'  
+rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  
 
 ## Building the packages (don't use catkin_make)
 catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3  
 source ./devel/setup.bash  
+
+## Useful cmd
+roscd dvrk2robosuite/   

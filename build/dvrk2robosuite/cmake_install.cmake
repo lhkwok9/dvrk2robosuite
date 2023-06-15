@@ -129,7 +129,7 @@ file(INSTALL DESTINATION "/home/jk/dvrk2robosuite/install" TYPE FILE FILES "/hom
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/dvrk2robosuite/msg" TYPE FILE FILES "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_cp.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/dvrk2robosuite/msg" TYPE FILE FILES "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_js.msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
