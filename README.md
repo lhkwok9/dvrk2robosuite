@@ -2,6 +2,7 @@
 
 ## Prerequisite
 Ubuntu 20.04  
+[Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) (to install robosuite in virtual environment)
 [Robosuite](https://robosuite.ai/docs/installation.html)  
 [ROS desktop-full](http://wiki.ros.org/noetic/Installation/Ubuntu)  
 [catkin_tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) (for catkin build)  
@@ -17,9 +18,6 @@ roscore
 rosrun dvrk2robosuite ros_keyboard.py  
 
 ## Third terminal (Example cmd)
-rostopic pub -r 20 /MTML/measured_js dvrk2robosuite/measured_js 0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
-rostopic pub -1 /MTMR/measured_js dvrk2robosuite/measured_js -- -0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
-
 rostopic pub -1 /MTML/measured_js dvrk2robosuite/measured_js '{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}'  
 rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  
 
@@ -29,3 +27,5 @@ source ./devel/setup.bash
 
 ## Useful cmd
 roscd dvrk2robosuite/   
+rostopic type /MTML/measured_js | rosmsg show
+rostopic echo /MTMR/gripper/measured_js
