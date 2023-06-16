@@ -1,0 +1,26 @@
+[35m[1mScanning dependencies of target _dvrk2robosuite_generate_messages_check_deps_measured_cp[0m
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_cp
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_cv
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_js
+[ 29%] [34m[1mGenerating EusLisp code from dvrk2robosuite/measured_cp.msg[0m
+[ 29%] [34m[1mGenerating Javascript code from dvrk2robosuite/measured_cp.msg[0m
+[ 29%] [34m[1mGenerating Python from MSG dvrk2robosuite/measured_cp[0m
+[ 29%] [34m[1mGenerating Lisp code from dvrk2robosuite/measured_cp.msg[0m
+[ 29%] [34m[1mGenerating C++ code from dvrk2robosuite/measured_cp.msg[0m
+[ 41%] Built target dvrk2robosuite_generate_messages_lisp
+[ 52%] Built target dvrk2robosuite_generate_messages_nodejs
+[ 70%] Built target dvrk2robosuite_generate_messages_eus
+[ 82%] Built target dvrk2robosuite_generate_messages_cpp
+[ 88%] [34m[1mGenerating Python msg __init__.py for dvrk2robosuite[0m
+[100%] Built target dvrk2robosuite_generate_messages_py
+[100%] Built target dvrk2robosuite_generate_messages

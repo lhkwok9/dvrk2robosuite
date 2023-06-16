@@ -9,21 +9,25 @@ Ubuntu 20.04
 
 ## For each terminal  
 ```bash
+cd ~/dvrk2robosuite
 conda activate robosuite  
+export ROS_MASTER_URI=http://192.168.3.200:11311  
+export ROS_IP=192.168.3.199  
 source devel/setup.bash  
 ```
 
 ## First terminal  
 ```bash
-roscore
-```  
-
-## Second terminal  
-```bash
+cd ~/dvrk2robosuite
+conda activate robosuite  
+export ROS_MASTER_URI=http://192.168.3.200:11311  
+export ROS_IP=192.168.3.199  
+source devel/setup.bash  
+export MUJOCO_GL="osmesa"
 rosrun dvrk2robosuite ros_keyboard.py  
 ```
 
-## Third terminal (Example cmd)
+## Second terminal (Example cmd)
 ```bash
 rostopic pub -1 /MTML/measured_js dvrk2robosuite/measured_js '{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}'  
 rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  

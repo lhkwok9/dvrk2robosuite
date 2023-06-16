@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jk/dvrk2robosuite/src/dvrk2robosuite
+CMAKE_SOURCE_DIR = /home/tyx/dvrk2robosuite/src/dvrk2robosuite
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jk/dvrk2robosuite/build/dvrk2robosuite
+CMAKE_BINARY_DIR = /home/tyx/dvrk2robosuite/build/dvrk2robosuite
 
 # Utility rule file for dvrk2robosuite_geneus.
 
@@ -67,6 +67,6 @@ CMakeFiles/dvrk2robosuite_geneus.dir/clean:
 .PHONY : CMakeFiles/dvrk2robosuite_geneus.dir/clean
 
 CMakeFiles/dvrk2robosuite_geneus.dir/depend:
-	cd /home/jk/dvrk2robosuite/build/dvrk2robosuite && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jk/dvrk2robosuite/src/dvrk2robosuite /home/jk/dvrk2robosuite/src/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite/CMakeFiles/dvrk2robosuite_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/tyx/dvrk2robosuite/build/dvrk2robosuite && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyx/dvrk2robosuite/src/dvrk2robosuite /home/tyx/dvrk2robosuite/src/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite/CMakeFiles/dvrk2robosuite_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/dvrk2robosuite_geneus.dir/depend
 

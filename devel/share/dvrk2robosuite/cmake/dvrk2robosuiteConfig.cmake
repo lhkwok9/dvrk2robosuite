@@ -1,1 +1,1 @@
-/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/dvrk2robosuite/cmake/dvrk2robosuiteConfig.cmake
+/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/share/dvrk2robosuite/cmake/dvrk2robosuiteConfig.cmake

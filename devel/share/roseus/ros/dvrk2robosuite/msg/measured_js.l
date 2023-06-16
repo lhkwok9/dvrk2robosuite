@@ -1,1 +1,1 @@
-/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/roseus/ros/dvrk2robosuite/msg/measured_js.l
+/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/share/roseus/ros/dvrk2robosuite/msg/measured_js.l

@@ -6,21 +6,62 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
+import geometry_msgs.msg
+import std_msgs.msg
 
 class measured_cp(genpy.Message):
-  _md5sum = "175a49f06988368beca4d79073ba2f80"
+  _md5sum = "b5764a33bfeb3588febc2682852579b0"
   _type = "dvrk2robosuite/measured_cp"
-  _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """float64 a
-float64 b
-float64 c
-float64 d
-float64 e
-float64 f
-float64 g
-float64 gripper"""
-  __slots__ = ['a','b','c','d','e','f','g','gripper']
-  _slot_types = ['float64','float64','float64','float64','float64','float64','float64','float64']
+  _has_header = True  # flag to mark the presence of a Header object
+  _full_text = """std_msgs/Header header
+string child_frame_id
+geometry_msgs/Transform transform
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Transform
+# This represents the transform between two coordinate frames in free space.
+
+Vector3 translation
+Quaternion rotation
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+# It is only meant to represent a direction. Therefore, it does not
+# make sense to apply a translation to it (e.g., when applying a 
+# generic rigid transformation to a Vector3, tf2 will only apply the
+# rotation). If you want your data to be translatable too, use the
+# geometry_msgs/Point message instead.
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+  __slots__ = ['header','child_frame_id','transform']
+  _slot_types = ['std_msgs/Header','string','geometry_msgs/Transform']
 
   def __init__(self, *args, **kwds):
     """
@@ -30,7 +71,7 @@ float64 gripper"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       a,b,c,d,e,f,g,gripper
+       header,child_frame_id,transform
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -39,31 +80,16 @@ float64 gripper"""
     if args or kwds:
       super(measured_cp, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.a is None:
-        self.a = 0.
-      if self.b is None:
-        self.b = 0.
-      if self.c is None:
-        self.c = 0.
-      if self.d is None:
-        self.d = 0.
-      if self.e is None:
-        self.e = 0.
-      if self.f is None:
-        self.f = 0.
-      if self.g is None:
-        self.g = 0.
-      if self.gripper is None:
-        self.gripper = 0.
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
+      if self.child_frame_id is None:
+        self.child_frame_id = ''
+      if self.transform is None:
+        self.transform = geometry_msgs.msg.Transform()
     else:
-      self.a = 0.
-      self.b = 0.
-      self.c = 0.
-      self.d = 0.
-      self.e = 0.
-      self.f = 0.
-      self.g = 0.
-      self.gripper = 0.
+      self.header = std_msgs.msg.Header()
+      self.child_frame_id = ''
+      self.transform = geometry_msgs.msg.Transform()
 
   def _get_types(self):
     """
@@ -78,7 +104,21 @@ float64 gripper"""
     """
     try:
       _x = self
-      buff.write(_get_struct_8d().pack(_x.a, _x.b, _x.c, _x.d, _x.e, _x.f, _x.g, _x.gripper))
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self.child_frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self
+      buff.write(_get_struct_7d().pack(_x.transform.translation.x, _x.transform.translation.y, _x.transform.translation.z, _x.transform.rotation.x, _x.transform.rotation.y, _x.transform.rotation.z, _x.transform.rotation.w))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -90,11 +130,37 @@ float64 gripper"""
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
+      if self.transform is None:
+        self.transform = geometry_msgs.msg.Transform()
       end = 0
       _x = self
       start = end
-      end += 64
-      (_x.a, _x.b, _x.c, _x.d, _x.e, _x.f, _x.g, _x.gripper,) = _get_struct_8d().unpack(str[start:end])
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.header.frame_id = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.child_frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.child_frame_id = str[start:end]
+      _x = self
+      start = end
+      end += 56
+      (_x.transform.translation.x, _x.transform.translation.y, _x.transform.translation.z, _x.transform.rotation.x, _x.transform.rotation.y, _x.transform.rotation.z, _x.transform.rotation.w,) = _get_struct_7d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -108,7 +174,21 @@ float64 gripper"""
     """
     try:
       _x = self
-      buff.write(_get_struct_8d().pack(_x.a, _x.b, _x.c, _x.d, _x.e, _x.f, _x.g, _x.gripper))
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self.child_frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self
+      buff.write(_get_struct_7d().pack(_x.transform.translation.x, _x.transform.translation.y, _x.transform.translation.z, _x.transform.rotation.x, _x.transform.rotation.y, _x.transform.rotation.z, _x.transform.rotation.w))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -121,11 +201,37 @@ float64 gripper"""
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
+      if self.transform is None:
+        self.transform = geometry_msgs.msg.Transform()
       end = 0
       _x = self
       start = end
-      end += 64
-      (_x.a, _x.b, _x.c, _x.d, _x.e, _x.f, _x.g, _x.gripper,) = _get_struct_8d().unpack(str[start:end])
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.header.frame_id = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.child_frame_id = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.child_frame_id = str[start:end]
+      _x = self
+      start = end
+      end += 56
+      (_x.transform.translation.x, _x.transform.translation.y, _x.transform.translation.z, _x.transform.rotation.x, _x.transform.rotation.y, _x.transform.rotation.z, _x.transform.rotation.w,) = _get_struct_7d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -134,9 +240,15 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_8d = None
-def _get_struct_8d():
-    global _struct_8d
-    if _struct_8d is None:
-        _struct_8d = struct.Struct("<8d")
-    return _struct_8d
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I
+_struct_7d = None
+def _get_struct_7d():
+    global _struct_7d
+    if _struct_7d is None:
+        _struct_7d = struct.Struct("<7d")
+    return _struct_7d

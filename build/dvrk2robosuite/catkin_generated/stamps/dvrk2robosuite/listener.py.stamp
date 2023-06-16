@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 import rospy
 # from std_msgs.msg import String
-from dvrk2robosuite.msg import measured_js
+from dvrk2robosuite.msg import measured_js, measured_cp, measured_cv
 
 def MTMLcallback(data):
-    rospy.loginfo(rospy.get_caller_id() + data.velocity)
+    # rospy.loginfo(rospy.get_caller_id() + " L arm: %lf, %lf, %lf, %lf, %lf, %lf, %lf", 
+    #     data.transform.translation.x, data.transform.translation.y, data.transform.translation.z, 
+    #     data.transform.rotation.x, data.transform.rotation.y, data.transform.rotation.z, data.transform.rotation.w)
+    rospy.loginfo(rospy.get_caller_id() + " L arm: %lf, %lf, %lf, %lf, %lf, %lf", 
+        data.twist.linear.x, data.twist.linear.y, data.twist.linear.z, 
+        data.twist.angular.x, data.twist.angular.y, data.twist.angular.z)
 
 def MTMLGrippercallback(data):
-    rospy.loginfo(rospy.get_caller_id() + data.velocity)
+    rospy.loginfo(rospy.get_caller_id() + " L gripper: %lf", data.position[0])
     
 def listener():
 
@@ -18,7 +23,8 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber("MTML/measured_js", measured_js, MTMLcallback)
+    # rospy.Subscriber("MTML/measured_cp", measured_cp, MTMLcallback)
+    rospy.Subscriber("MTML/measured_cv", measured_cv, MTMLcallback)
     rospy.Subscriber("MTML/gripper/measured_js", measured_js, MTMLGrippercallback)
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

@@ -1,1 +1,1 @@
-/home/jk/dvrk2robosuite/devel/.private/catkin_tools_prebuild/setup.bash
+/home/tyx/dvrk2robosuite/devel/.private/catkin_tools_prebuild/setup.bash

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jk/dvrk2robosuite/src/dvrk2robosuite
+CMAKE_SOURCE_DIR = /home/tyx/dvrk2robosuite/src/dvrk2robosuite
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jk/dvrk2robosuite/build/dvrk2robosuite
+CMAKE_BINARY_DIR = /home/tyx/dvrk2robosuite/build/dvrk2robosuite
 
 # Utility rule file for std_msgs_generate_messages_py.
 
@@ -67,6 +67,6 @@ CMakeFiles/std_msgs_generate_messages_py.dir/clean:
 .PHONY : CMakeFiles/std_msgs_generate_messages_py.dir/clean
 
 CMakeFiles/std_msgs_generate_messages_py.dir/depend:
-	cd /home/jk/dvrk2robosuite/build/dvrk2robosuite && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jk/dvrk2robosuite/src/dvrk2robosuite /home/jk/dvrk2robosuite/src/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite /home/jk/dvrk2robosuite/build/dvrk2robosuite/CMakeFiles/std_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/tyx/dvrk2robosuite/build/dvrk2robosuite && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyx/dvrk2robosuite/src/dvrk2robosuite /home/tyx/dvrk2robosuite/src/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite /home/tyx/dvrk2robosuite/build/dvrk2robosuite/CMakeFiles/std_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/std_msgs_generate_messages_py.dir/depend
 

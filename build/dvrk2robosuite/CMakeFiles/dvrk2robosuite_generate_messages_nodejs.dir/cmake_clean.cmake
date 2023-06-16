@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/gennodejs/ros/dvrk2robosuite/msg/measured_js.js"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/share/gennodejs/ros/dvrk2robosuite/msg/measured_cp.js"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/share/gennodejs/ros/dvrk2robosuite/msg/measured_cv.js"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/share/gennodejs/ros/dvrk2robosuite/msg/measured_js.js"
   "CMakeFiles/dvrk2robosuite_generate_messages_nodejs"
 )
 

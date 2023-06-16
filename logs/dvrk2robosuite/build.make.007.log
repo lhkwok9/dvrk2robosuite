@@ -1,0 +1,19 @@
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_cp
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_js
+[  0%] Built target _dvrk2robosuite_generate_messages_check_deps_measured_cv
+[ 94%] Built target dvrk2robosuite_generate_messages_py
+[ 94%] Built target dvrk2robosuite_generate_messages_cpp
+[ 94%] Built target dvrk2robosuite_generate_messages_eus
+[100%] Built target dvrk2robosuite_generate_messages_nodejs
+[ 94%] Built target dvrk2robosuite_generate_messages_lisp
+[100%] Built target dvrk2robosuite_generate_messages

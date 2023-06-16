@@ -8,13 +8,15 @@
 
 #include <string>
 #include <vector>
-#include <memory>
+#include <map>
 
 #include <ros/types.h>
 #include <ros/serialization.h>
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <std_msgs/Header.h>
+#include <geometry_msgs/Transform.h>
 
 namespace dvrk2robosuite
 {
@@ -24,52 +26,27 @@ struct measured_cp_
   typedef measured_cp_<ContainerAllocator> Type;
 
   measured_cp_()
-    : a(0.0)
-    , b(0.0)
-    , c(0.0)
-    , d(0.0)
-    , e(0.0)
-    , f(0.0)
-    , g(0.0)
-    , gripper(0.0)  {
+    : header()
+    , child_frame_id()
+    , transform()  {
     }
   measured_cp_(const ContainerAllocator& _alloc)
-    : a(0.0)
-    , b(0.0)
-    , c(0.0)
-    , d(0.0)
-    , e(0.0)
-    , f(0.0)
-    , g(0.0)
-    , gripper(0.0)  {
+    : header(_alloc)
+    , child_frame_id(_alloc)
+    , transform(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef double _a_type;
-  _a_type a;
+   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
+  _header_type header;
 
-   typedef double _b_type;
-  _b_type b;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _child_frame_id_type;
+  _child_frame_id_type child_frame_id;
 
-   typedef double _c_type;
-  _c_type c;
-
-   typedef double _d_type;
-  _d_type d;
-
-   typedef double _e_type;
-  _e_type e;
-
-   typedef double _f_type;
-  _f_type f;
-
-   typedef double _g_type;
-  _g_type g;
-
-   typedef double _gripper_type;
-  _gripper_type gripper;
+   typedef  ::geometry_msgs::Transform_<ContainerAllocator>  _transform_type;
+  _transform_type transform;
 
 
 
@@ -100,14 +77,9 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::dvrk2robosuite::measured_cp_<ContainerAllocator1> & lhs, const ::dvrk2robosuite::measured_cp_<ContainerAllocator2> & rhs)
 {
-  return lhs.a == rhs.a &&
-    lhs.b == rhs.b &&
-    lhs.c == rhs.c &&
-    lhs.d == rhs.d &&
-    lhs.e == rhs.e &&
-    lhs.f == rhs.f &&
-    lhs.g == rhs.g &&
-    lhs.gripper == rhs.gripper;
+  return lhs.header == rhs.header &&
+    lhs.child_frame_id == rhs.child_frame_id &&
+    lhs.transform == rhs.transform;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -140,22 +112,22 @@ struct IsMessage< ::dvrk2robosuite::measured_cp_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dvrk2robosuite::measured_cp_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dvrk2robosuite::measured_cp_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::dvrk2robosuite::measured_cp_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::dvrk2robosuite::measured_cp_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 
@@ -164,12 +136,12 @@ struct MD5Sum< ::dvrk2robosuite::measured_cp_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "175a49f06988368beca4d79073ba2f80";
+    return "b5764a33bfeb3588febc2682852579b0";
   }
 
   static const char* value(const ::dvrk2robosuite::measured_cp_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x175a49f06988368bULL;
-  static const uint64_t static_value2 = 0xeca4d79073ba2f80ULL;
+  static const uint64_t static_value1 = 0xb5764a33bfeb3588ULL;
+  static const uint64_t static_value2 = 0xfebc2682852579b0ULL;
 };
 
 template<class ContainerAllocator>
@@ -188,14 +160,52 @@ struct Definition< ::dvrk2robosuite::measured_cp_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 a\n"
-"float64 b\n"
-"float64 c\n"
-"float64 d\n"
-"float64 e\n"
-"float64 f\n"
-"float64 g\n"
-"float64 gripper\n"
+    return "std_msgs/Header header\n"
+"string child_frame_id\n"
+"geometry_msgs/Transform transform\n"
+"================================================================================\n"
+"MSG: std_msgs/Header\n"
+"# Standard metadata for higher-level stamped data types.\n"
+"# This is generally used to communicate timestamped data \n"
+"# in a particular coordinate frame.\n"
+"# \n"
+"# sequence ID: consecutively increasing ID \n"
+"uint32 seq\n"
+"#Two-integer timestamp that is expressed as:\n"
+"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
+"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
+"# time-handling sugar is provided by the client library\n"
+"time stamp\n"
+"#Frame this data is associated with\n"
+"string frame_id\n"
+"\n"
+"================================================================================\n"
+"MSG: geometry_msgs/Transform\n"
+"# This represents the transform between two coordinate frames in free space.\n"
+"\n"
+"Vector3 translation\n"
+"Quaternion rotation\n"
+"\n"
+"================================================================================\n"
+"MSG: geometry_msgs/Vector3\n"
+"# This represents a vector in free space. \n"
+"# It is only meant to represent a direction. Therefore, it does not\n"
+"# make sense to apply a translation to it (e.g., when applying a \n"
+"# generic rigid transformation to a Vector3, tf2 will only apply the\n"
+"# rotation). If you want your data to be translatable too, use the\n"
+"# geometry_msgs/Point message instead.\n"
+"\n"
+"float64 x\n"
+"float64 y\n"
+"float64 z\n"
+"================================================================================\n"
+"MSG: geometry_msgs/Quaternion\n"
+"# This represents an orientation in free space in quaternion form.\n"
+"\n"
+"float64 x\n"
+"float64 y\n"
+"float64 z\n"
+"float64 w\n"
 ;
   }
 
@@ -214,14 +224,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.a);
-      stream.next(m.b);
-      stream.next(m.c);
-      stream.next(m.d);
-      stream.next(m.e);
-      stream.next(m.f);
-      stream.next(m.g);
-      stream.next(m.gripper);
+      stream.next(m.header);
+      stream.next(m.child_frame_id);
+      stream.next(m.transform);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -240,22 +245,14 @@ struct Printer< ::dvrk2robosuite::measured_cp_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::dvrk2robosuite::measured_cp_<ContainerAllocator>& v)
   {
-    s << indent << "a: ";
-    Printer<double>::stream(s, indent + "  ", v.a);
-    s << indent << "b: ";
-    Printer<double>::stream(s, indent + "  ", v.b);
-    s << indent << "c: ";
-    Printer<double>::stream(s, indent + "  ", v.c);
-    s << indent << "d: ";
-    Printer<double>::stream(s, indent + "  ", v.d);
-    s << indent << "e: ";
-    Printer<double>::stream(s, indent + "  ", v.e);
-    s << indent << "f: ";
-    Printer<double>::stream(s, indent + "  ", v.f);
-    s << indent << "g: ";
-    Printer<double>::stream(s, indent + "  ", v.g);
-    s << indent << "gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.gripper);
+    s << indent << "header: ";
+    s << std::endl;
+    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
+    s << indent << "child_frame_id: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.child_frame_id);
+    s << indent << "transform: ";
+    s << std::endl;
+    Printer< ::geometry_msgs::Transform_<ContainerAllocator> >::stream(s, indent + "  ", v.transform);
   }
 };
 

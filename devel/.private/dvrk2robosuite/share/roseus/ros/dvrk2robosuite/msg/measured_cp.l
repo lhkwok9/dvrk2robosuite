@@ -10,137 +10,133 @@
 
 (in-package "ROS")
 ;;//! \htmlinclude measured_cp.msg.html
+(if (not (find-package "GEOMETRY_MSGS"))
+  (ros::roseus-add-msgs "geometry_msgs"))
+(if (not (find-package "STD_MSGS"))
+  (ros::roseus-add-msgs "std_msgs"))
 
 
 (defclass dvrk2robosuite::measured_cp
   :super ros::object
-  :slots (_a _b _c _d _e _f _g _gripper ))
+  :slots (_header _child_frame_id _transform ))
 
 (defmethod dvrk2robosuite::measured_cp
   (:init
    (&key
-    ((:a __a) 0.0)
-    ((:b __b) 0.0)
-    ((:c __c) 0.0)
-    ((:d __d) 0.0)
-    ((:e __e) 0.0)
-    ((:f __f) 0.0)
-    ((:g __g) 0.0)
-    ((:gripper __gripper) 0.0)
+    ((:header __header) (instance std_msgs::Header :init))
+    ((:child_frame_id __child_frame_id) "")
+    ((:transform __transform) (instance geometry_msgs::Transform :init))
     )
    (send-super :init)
-   (setq _a (float __a))
-   (setq _b (float __b))
-   (setq _c (float __c))
-   (setq _d (float __d))
-   (setq _e (float __e))
-   (setq _f (float __f))
-   (setq _g (float __g))
-   (setq _gripper (float __gripper))
+   (setq _header __header)
+   (setq _child_frame_id (string __child_frame_id))
+   (setq _transform __transform)
    self)
-  (:a
-   (&optional __a)
-   (if __a (setq _a __a)) _a)
-  (:b
-   (&optional __b)
-   (if __b (setq _b __b)) _b)
-  (:c
-   (&optional __c)
-   (if __c (setq _c __c)) _c)
-  (:d
-   (&optional __d)
-   (if __d (setq _d __d)) _d)
-  (:e
-   (&optional __e)
-   (if __e (setq _e __e)) _e)
-  (:f
-   (&optional __f)
-   (if __f (setq _f __f)) _f)
-  (:g
-   (&optional __g)
-   (if __g (setq _g __g)) _g)
-  (:gripper
-   (&optional __gripper)
-   (if __gripper (setq _gripper __gripper)) _gripper)
+  (:header
+   (&rest __header)
+   (if (keywordp (car __header))
+       (send* _header __header)
+     (progn
+       (if __header (setq _header (car __header)))
+       _header)))
+  (:child_frame_id
+   (&optional __child_frame_id)
+   (if __child_frame_id (setq _child_frame_id __child_frame_id)) _child_frame_id)
+  (:transform
+   (&rest __transform)
+   (if (keywordp (car __transform))
+       (send* _transform __transform)
+     (progn
+       (if __transform (setq _transform (car __transform)))
+       _transform)))
   (:serialization-length
    ()
    (+
-    ;; float64 _a
-    8
-    ;; float64 _b
-    8
-    ;; float64 _c
-    8
-    ;; float64 _d
-    8
-    ;; float64 _e
-    8
-    ;; float64 _f
-    8
-    ;; float64 _g
-    8
-    ;; float64 _gripper
-    8
+    ;; std_msgs/Header _header
+    (send _header :serialization-length)
+    ;; string _child_frame_id
+    4 (length _child_frame_id)
+    ;; geometry_msgs/Transform _transform
+    (send _transform :serialization-length)
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; float64 _a
-       (sys::poke _a (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _b
-       (sys::poke _b (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _c
-       (sys::poke _c (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _d
-       (sys::poke _d (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _e
-       (sys::poke _e (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _f
-       (sys::poke _f (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _g
-       (sys::poke _g (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _gripper
-       (sys::poke _gripper (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; std_msgs/Header _header
+       (send _header :serialize s)
+     ;; string _child_frame_id
+       (write-long (length _child_frame_id) s) (princ _child_frame_id s)
+     ;; geometry_msgs/Transform _transform
+       (send _transform :serialize s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; float64 _a
-     (setq _a (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _b
-     (setq _b (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _c
-     (setq _c (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _d
-     (setq _d (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _e
-     (setq _e (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _f
-     (setq _f (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _g
-     (setq _g (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _gripper
-     (setq _gripper (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; std_msgs/Header _header
+     (send _header :deserialize buf ptr-) (incf ptr- (send _header :serialization-length))
+   ;; string _child_frame_id
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _child_frame_id (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; geometry_msgs/Transform _transform
+     (send _transform :deserialize buf ptr-) (incf ptr- (send _transform :serialization-length))
    ;;
    self)
   )
 
-(setf (get dvrk2robosuite::measured_cp :md5sum-) "175a49f06988368beca4d79073ba2f80")
+(setf (get dvrk2robosuite::measured_cp :md5sum-) "b5764a33bfeb3588febc2682852579b0")
 (setf (get dvrk2robosuite::measured_cp :datatype-) "dvrk2robosuite/measured_cp")
 (setf (get dvrk2robosuite::measured_cp :definition-)
-      "float64 a
-float64 b
-float64 c
-float64 d
-float64 e
-float64 f
-float64 g
-float64 gripper
+      "std_msgs/Header header
+string child_frame_id
+geometry_msgs/Transform transform
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Transform
+# This represents the transform between two coordinate frames in free space.
+
+Vector3 translation
+Quaternion rotation
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+# It is only meant to represent a direction. Therefore, it does not
+# make sense to apply a translation to it (e.g., when applying a 
+# generic rigid transformation to a Vector3, tf2 will only apply the
+# rotation). If you want your data to be translatable too, use the
+# geometry_msgs/Point message instead.
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
 ")
 
 
 
-(provide :dvrk2robosuite/measured_cp "175a49f06988368beca4d79073ba2f80")
+(provide :dvrk2robosuite/measured_cp "b5764a33bfeb3588febc2682852579b0")
 
 

@@ -1,0 +1,15 @@
+[31m[1mCMake Error[0m at /home/tyx/dvrk2robosuite/build/dvrk2robosuite/cmake/dvrk2robosuite-genmsg.cmake:3 (message):
+  Could not find messages which
+  '/home/tyx/dvrk2robosuite/src/dvrk2robosuite/msg/measured_cv.msg' depends
+  on.  Did you forget to specify generate_messages(DEPENDENCIES ...)?
+
+  Cannot locate message [Twist]: unknown package [geometry_msgs] on search
+  path [{{'dvrk2robosuite':
+  ['/home/tyx/dvrk2robosuite/src/dvrk2robosuite/msg'], 'std_msgs':
+  ['/opt/ros/noetic/share/std_msgs/cmake/../msg']}}]
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:72 (generate_messages)
+
+
+make: *** [Makefile:698: cmake_check_build_system] Error 1

@@ -1,1 +1,1 @@
-/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/lib/pkgconfig/dvrk2robosuite.pc
+/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/lib/pkgconfig/dvrk2robosuite.pc

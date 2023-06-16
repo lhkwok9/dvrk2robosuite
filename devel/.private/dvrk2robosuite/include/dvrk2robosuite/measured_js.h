@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include <memory>
+#include <map>
 
 #include <ros/types.h>
 #include <ros/serialization.h>
@@ -45,16 +45,16 @@ struct measured_js_
    typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
   _header_type header;
 
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>> _name_type;
+   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > , typename ContainerAllocator::template rebind<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::other >  _name_type;
   _name_type name;
 
-   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _position_type;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _position_type;
   _position_type position;
 
-   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _velocity_type;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _velocity_type;
   _velocity_type velocity;
 
-   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _effort_type;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _effort_type;
   _effort_type effort;
 
 
@@ -239,7 +239,7 @@ struct Printer< ::dvrk2robosuite::measured_js_<ContainerAllocator> >
     for (size_t i = 0; i < v.name.size(); ++i)
     {
       s << indent << "  name[" << i << "]: ";
-      Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.name[i]);
+      Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.name[i]);
     }
     s << indent << "position[]" << std::endl;
     for (size_t i = 0; i < v.position.size(); ++i)

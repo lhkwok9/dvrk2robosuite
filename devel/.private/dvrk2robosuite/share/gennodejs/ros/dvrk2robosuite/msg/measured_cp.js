@@ -11,6 +11,8 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
+let std_msgs = _finder('std_msgs');
+let geometry_msgs = _finder('geometry_msgs');
 
 //-----------------------------------------------------------
 
@@ -18,85 +20,40 @@ class measured_cp {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.a = null;
-      this.b = null;
-      this.c = null;
-      this.d = null;
-      this.e = null;
-      this.f = null;
-      this.g = null;
-      this.gripper = null;
+      this.header = null;
+      this.child_frame_id = null;
+      this.transform = null;
     }
     else {
-      if (initObj.hasOwnProperty('a')) {
-        this.a = initObj.a
+      if (initObj.hasOwnProperty('header')) {
+        this.header = initObj.header
       }
       else {
-        this.a = 0.0;
+        this.header = new std_msgs.msg.Header();
       }
-      if (initObj.hasOwnProperty('b')) {
-        this.b = initObj.b
-      }
-      else {
-        this.b = 0.0;
-      }
-      if (initObj.hasOwnProperty('c')) {
-        this.c = initObj.c
+      if (initObj.hasOwnProperty('child_frame_id')) {
+        this.child_frame_id = initObj.child_frame_id
       }
       else {
-        this.c = 0.0;
+        this.child_frame_id = '';
       }
-      if (initObj.hasOwnProperty('d')) {
-        this.d = initObj.d
-      }
-      else {
-        this.d = 0.0;
-      }
-      if (initObj.hasOwnProperty('e')) {
-        this.e = initObj.e
+      if (initObj.hasOwnProperty('transform')) {
+        this.transform = initObj.transform
       }
       else {
-        this.e = 0.0;
-      }
-      if (initObj.hasOwnProperty('f')) {
-        this.f = initObj.f
-      }
-      else {
-        this.f = 0.0;
-      }
-      if (initObj.hasOwnProperty('g')) {
-        this.g = initObj.g
-      }
-      else {
-        this.g = 0.0;
-      }
-      if (initObj.hasOwnProperty('gripper')) {
-        this.gripper = initObj.gripper
-      }
-      else {
-        this.gripper = 0.0;
+        this.transform = new geometry_msgs.msg.Transform();
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type measured_cp
-    // Serialize message field [a]
-    bufferOffset = _serializer.float64(obj.a, buffer, bufferOffset);
-    // Serialize message field [b]
-    bufferOffset = _serializer.float64(obj.b, buffer, bufferOffset);
-    // Serialize message field [c]
-    bufferOffset = _serializer.float64(obj.c, buffer, bufferOffset);
-    // Serialize message field [d]
-    bufferOffset = _serializer.float64(obj.d, buffer, bufferOffset);
-    // Serialize message field [e]
-    bufferOffset = _serializer.float64(obj.e, buffer, bufferOffset);
-    // Serialize message field [f]
-    bufferOffset = _serializer.float64(obj.f, buffer, bufferOffset);
-    // Serialize message field [g]
-    bufferOffset = _serializer.float64(obj.g, buffer, bufferOffset);
-    // Serialize message field [gripper]
-    bufferOffset = _serializer.float64(obj.gripper, buffer, bufferOffset);
+    // Serialize message field [header]
+    bufferOffset = std_msgs.msg.Header.serialize(obj.header, buffer, bufferOffset);
+    // Serialize message field [child_frame_id]
+    bufferOffset = _serializer.string(obj.child_frame_id, buffer, bufferOffset);
+    // Serialize message field [transform]
+    bufferOffset = geometry_msgs.msg.Transform.serialize(obj.transform, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -104,27 +61,20 @@ class measured_cp {
     //deserializes a message object of type measured_cp
     let len;
     let data = new measured_cp(null);
-    // Deserialize message field [a]
-    data.a = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [b]
-    data.b = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [c]
-    data.c = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [d]
-    data.d = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [e]
-    data.e = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [f]
-    data.f = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [g]
-    data.g = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [gripper]
-    data.gripper = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [header]
+    data.header = std_msgs.msg.Header.deserialize(buffer, bufferOffset);
+    // Deserialize message field [child_frame_id]
+    data.child_frame_id = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [transform]
+    data.transform = geometry_msgs.msg.Transform.deserialize(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 64;
+    let length = 0;
+    length += std_msgs.msg.Header.getMessageSize(object.header);
+    length += _getByteLength(object.child_frame_id);
+    return length + 60;
   }
 
   static datatype() {
@@ -134,20 +84,59 @@ class measured_cp {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '175a49f06988368beca4d79073ba2f80';
+    return 'b5764a33bfeb3588febc2682852579b0';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    float64 a
-    float64 b
-    float64 c
-    float64 d
-    float64 e
-    float64 f
-    float64 g
-    float64 gripper
+    std_msgs/Header header
+    string child_frame_id
+    geometry_msgs/Transform transform
+    ================================================================================
+    MSG: std_msgs/Header
+    # Standard metadata for higher-level stamped data types.
+    # This is generally used to communicate timestamped data 
+    # in a particular coordinate frame.
+    # 
+    # sequence ID: consecutively increasing ID 
+    uint32 seq
+    #Two-integer timestamp that is expressed as:
+    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+    # time-handling sugar is provided by the client library
+    time stamp
+    #Frame this data is associated with
+    string frame_id
+    
+    ================================================================================
+    MSG: geometry_msgs/Transform
+    # This represents the transform between two coordinate frames in free space.
+    
+    Vector3 translation
+    Quaternion rotation
+    
+    ================================================================================
+    MSG: geometry_msgs/Vector3
+    # This represents a vector in free space. 
+    # It is only meant to represent a direction. Therefore, it does not
+    # make sense to apply a translation to it (e.g., when applying a 
+    # generic rigid transformation to a Vector3, tf2 will only apply the
+    # rotation). If you want your data to be translatable too, use the
+    # geometry_msgs/Point message instead.
+    
+    float64 x
+    float64 y
+    float64 z
+    ================================================================================
+    MSG: geometry_msgs/Quaternion
+    # This represents an orientation in free space in quaternion form.
+    
+    float64 x
+    float64 y
+    float64 z
+    float64 w
+    
     `;
   }
 
@@ -157,60 +146,25 @@ class measured_cp {
       msg = {};
     }
     const resolved = new measured_cp(null);
-    if (msg.a !== undefined) {
-      resolved.a = msg.a;
+    if (msg.header !== undefined) {
+      resolved.header = std_msgs.msg.Header.Resolve(msg.header)
     }
     else {
-      resolved.a = 0.0
+      resolved.header = new std_msgs.msg.Header()
     }
 
-    if (msg.b !== undefined) {
-      resolved.b = msg.b;
+    if (msg.child_frame_id !== undefined) {
+      resolved.child_frame_id = msg.child_frame_id;
     }
     else {
-      resolved.b = 0.0
+      resolved.child_frame_id = ''
     }
 
-    if (msg.c !== undefined) {
-      resolved.c = msg.c;
+    if (msg.transform !== undefined) {
+      resolved.transform = geometry_msgs.msg.Transform.Resolve(msg.transform)
     }
     else {
-      resolved.c = 0.0
-    }
-
-    if (msg.d !== undefined) {
-      resolved.d = msg.d;
-    }
-    else {
-      resolved.d = 0.0
-    }
-
-    if (msg.e !== undefined) {
-      resolved.e = msg.e;
-    }
-    else {
-      resolved.e = 0.0
-    }
-
-    if (msg.f !== undefined) {
-      resolved.f = msg.f;
-    }
-    else {
-      resolved.f = 0.0
-    }
-
-    if (msg.g !== undefined) {
-      resolved.g = msg.g;
-    }
-    else {
-      resolved.g = 0.0
-    }
-
-    if (msg.gripper !== undefined) {
-      resolved.gripper = msg.gripper;
-    }
-    else {
-      resolved.gripper = 0.0
+      resolved.transform = new geometry_msgs.msg.Transform()
     }
 
     return resolved;

@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/include/dvrk2robosuite/measured_js.h"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include/dvrk2robosuite/measured_cp.h"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include/dvrk2robosuite/measured_cv.h"
+  "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include/dvrk2robosuite/measured_js.h"
   "CMakeFiles/dvrk2robosuite_generate_messages_cpp"
 )
 
