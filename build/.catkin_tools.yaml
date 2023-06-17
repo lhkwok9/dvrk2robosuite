@@ -1,6 +1,6 @@
-devel_space: /home/tyx/dvrk2robosuite/devel
+devel_space: /home/jk/dvrk2robosuite/devel
 install: false
-install_space: /home/tyx/dvrk2robosuite/install
+install_space: /home/jk/dvrk2robosuite/install
 profile: default
-source_space: /home/tyx/dvrk2robosuite/src
-workspace: /home/tyx/dvrk2robosuite
+source_space: /home/jk/dvrk2robosuite/src
+workspace: /home/jk/dvrk2robosuite

@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/tyx/dvrk2robosuite/install")
+  set(CMAKE_INSTALL_PREFIX "/home/jk/dvrk2robosuite/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/tyx/dvrk2robosuite/build/dvrk2robosuite/gtest/googletest/cmake_install.cmake")
+  include("/home/jk/dvrk2robosuite/build/dvrk2robosuite/gtest/googletest/cmake_install.cmake")
 
 endif()
 

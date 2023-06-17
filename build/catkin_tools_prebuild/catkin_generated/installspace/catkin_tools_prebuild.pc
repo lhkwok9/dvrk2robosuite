@@ -1,4 +1,4 @@
-prefix=/home/tyx/dvrk2robosuite/install
+prefix=/home/jk/dvrk2robosuite/install
 
 Name: catkin_tools_prebuild
 Description: Description of catkin_tools_prebuild

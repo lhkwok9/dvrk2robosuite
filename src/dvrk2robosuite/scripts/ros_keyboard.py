@@ -7,25 +7,25 @@ from robosuite import load_controller_config
 
 def MTMLcallback(data):
     global MTMLaction
-    # MTMLaction[0] = data.transform.translation.x
-    # MTMLaction[1] = data.transform.translation.y
-    # MTMLaction[2] = data.transform.translation.z
-    # MTMLaction[3] = data.transform.rotation.x
-    # MTMLaction[4] = data.transform.rotation.y
-    # MTMLaction[5] = data.transform.rotation.z
+    MTMLaction[0] = data.transform.translation.x
+    MTMLaction[1] = data.transform.translation.y
+    MTMLaction[2] = data.transform.translation.z
+    MTMLaction[3] = data.transform.rotation.x
+    MTMLaction[4] = data.transform.rotation.y
+    MTMLaction[5] = data.transform.rotation.z
     # MTMLaction[6] = data.transform.rotation.w
-    MTMLaction[0] = data.twist.linear.x
-    MTMLaction[1] = data.twist.linear.y
-    MTMLaction[2] = data.twist.linear.z
-    MTMLaction[3] = data.twist.angular.x
-    MTMLaction[4] = data.twist.angular.y
-    MTMLaction[5] = data.twist.angular.z
+    # MTMLaction[0] = data.twist.linear.x
+    # MTMLaction[1] = data.twist.linear.y
+    # MTMLaction[2] = data.twist.linear.z
+    # MTMLaction[3] = data.twist.angular.x
+    # MTMLaction[4] = data.twist.angular.y
+    # MTMLaction[5] = data.twist.angular.z
 
 
 
 def MTMLlistener():
-    # rospy.Subscriber("/MTML/measured_cp", measured_cp, MTMLcallback)
-    rospy.Subscriber("/MTML/measured_cv", measured_cv, MTMLcallback)
+    rospy.Subscriber("/MTML/measured_cp", measured_cp, MTMLcallback)
+    # rospy.Subscriber("/MTML/measured_cv", measured_cv, MTMLcallback)
 
 def MTMLGrippercallback(data):
     global MTMLaction
@@ -48,6 +48,16 @@ def MTMRGrippercallback(data):
 
 def MTMRGripperlistener():
     rospy.Subscriber("/MTMR/gripper/measured_cv", measured_cv, MTMRGrippercallback)
+
+# def robosuiteLeftTalker():
+    # 32 float64: 14 arm joint positions (encoded using 7 sin and 7 cos), 7 arm joint velocities, 3+4 end effector pose, 2 gripper finger positions, and 2 gripper finger velocities
+    # pub = rospy.Publisher('/simulator/L/', String, queue_size=10)
+    # rate = rospy.Rate(20) # 10hz
+    # while not rospy.is_shutdown():
+    #     hello_str = "hello world %s" % rospy.get_time()
+        # rospy.loginfo(hello_str)
+        # pub.publish(hello_str)
+        # rate.sleep()
 
 if __name__ == "__main__":
 
@@ -90,9 +100,18 @@ if __name__ == "__main__":
     # print(env.robots[1].dof)
 
     # do visualization
+    # for i in range(2):
     while True:
         MTMLlistener()
         action = np.append(MTMLaction, MTMRaction)
-        print(action)
-        _, _, _, _ = env.step(action)
+        # print(action)
+        obs, reward, done, info = env.step(action)
+        # print(f"{obs['robot0_joint_pos_cos']=}")
+        # print(f"{obs['robot0_joint_pos_sin']=}")
+        # print(f"{obs['robot0_joint_vel']=}")
+        print(f"{obs['robot0_eef_pos']=}")
+        # print(f"{obs['robot0_eef_quat']=}")
+        # print(f"{obs['robot0_gripper_qpos']=}")
+        # print(f"{obs['robot0_gripper_qvel']=}")
+        # print(f"{obs['robot0_gripper_qpos']=}")
         env.render()

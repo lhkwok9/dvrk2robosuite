@@ -67,14 +67,14 @@ set(dvrk2robosuite_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(dvrk2robosuite_SOURCE_PREFIX /home/tyx/dvrk2robosuite/src/dvrk2robosuite)
-  set(dvrk2robosuite_DEVEL_PREFIX /home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite)
+  set(dvrk2robosuite_SOURCE_PREFIX /home/jk/dvrk2robosuite/src/dvrk2robosuite)
+  set(dvrk2robosuite_DEVEL_PREFIX /home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite)
   set(dvrk2robosuite_INSTALL_PREFIX "")
   set(dvrk2robosuite_PREFIX ${dvrk2robosuite_DEVEL_PREFIX})
 else()
   set(dvrk2robosuite_SOURCE_PREFIX "")
   set(dvrk2robosuite_DEVEL_PREFIX "")
-  set(dvrk2robosuite_INSTALL_PREFIX /home/tyx/dvrk2robosuite/install)
+  set(dvrk2robosuite_INSTALL_PREFIX /home/jk/dvrk2robosuite/install)
   set(dvrk2robosuite_PREFIX ${dvrk2robosuite_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(dvrk2robosuite_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include " STREQUAL " ")
+if(NOT "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/include " STREQUAL " ")
   set(dvrk2robosuite_INCLUDE_DIRS "")
-  set(_include_dirs "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include")
+  set(_include_dirs "/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/include " STREQUA
         message(FATAL_ERROR "Project 'dvrk2robosuite' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'dvrk2robosuite' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/tyx/dvrk2robosuite/src/dvrk2robosuite/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'dvrk2robosuite' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/jk/dvrk2robosuite/src/dvrk2robosuite/${idir}'.  ${_report}")
     endif()
     _list_append_unique(dvrk2robosuite_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/tyx/dvrk2robosuite/devel/.private/dvrk2robosuite/lib;/home/tyx/dvrk2robosuite/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/lib;/home/jk/dvrk2robosuite/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

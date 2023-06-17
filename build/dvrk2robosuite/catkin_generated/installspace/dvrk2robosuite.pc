@@ -1,4 +1,4 @@
-prefix=/home/tyx/dvrk2robosuite/install
+prefix=/home/jk/dvrk2robosuite/install
 
 Name: dvrk2robosuite
 Description: Description of dvrk2robosuite

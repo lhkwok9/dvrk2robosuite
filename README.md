@@ -7,6 +7,13 @@ Ubuntu 20.04
 [ROS desktop-full](http://wiki.ros.org/noetic/Installation/Ubuntu)  
 [catkin_tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) (for catkin build)  
 
+## Building the packages b4 using (don't use catkin_make)
+```bash
+catkin clean
+catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3  
+source ./devel/setup.bash  
+```
+
 ## For each terminal  
 ```bash
 cd ~/dvrk2robosuite
@@ -31,12 +38,6 @@ rosrun dvrk2robosuite ros_keyboard.py
 ```bash
 rostopic pub -1 /MTML/measured_js dvrk2robosuite/measured_js '{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}'  
 rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  
-```
-
-## Building the packages (don't use catkin_make)
-```bash
-catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3  
-source ./devel/setup.bash  
 ```
 
 ## Useful cmd
