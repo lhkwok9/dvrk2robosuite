@@ -9,6 +9,7 @@ Ubuntu 20.04
 
 ## Building the packages b4 using (don't use catkin_make)
 ```bash
+conda activate robosuite  
 catkin clean
 catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3  
 source ./devel/setup.bash  
@@ -36,7 +37,7 @@ rosrun dvrk2robosuite ros_keyboard.py
 
 ## Second terminal (Example cmd)
 ```bash
-rostopic pub -1 /MTML/measured_js dvrk2robosuite/measured_js '{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}'  
+rostopic pub -1 /MTML/measured_cp dvrk2robosuite/measured_cp
 rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  
 ```
 

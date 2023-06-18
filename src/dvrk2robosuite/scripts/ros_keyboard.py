@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 import numpy as np
+import xml.etree.ElementTree as ET
+
 import rospy
 from dvrk2robosuite.msg import measured_js, measured_cv, measured_cp
+
 import robosuite as suite
 from robosuite import load_controller_config
+from robosuite.utils.camera_utils import CameraMover
 
 def MTMLcallback(data):
     global MTMLaction
@@ -74,13 +78,38 @@ if __name__ == "__main__":
     env = suite.make(
         **config,
         has_renderer=True,
-        has_offscreen_renderer=False,
+        has_offscreen_renderer=True,
         ignore_done=True,
-        use_camera_obs=False,
+        use_camera_obs=True,
+        use_object_obs=False,
+        camera_names=["robot0_eye_in_hand", "robot1_eye_in_hand", "customfrontview", "custombirdview"],
+        camera_heights=480,
+        camera_widths=640,
         control_freq=20,
     )
     env.reset()
-    env.viewer.set_camera(camera_id=0)
+
+    # set up camera
+    inp = "birdview"
+    # 'frontview' 'birdview' 'agentview' 'sideview' 
+    # '<camera mode="fixed" name="customfrontview" pos="0.5029184206441294 -4.461397182381478e-07 1.0513675831326001" quat="0.582611083984375 0.40070417523384094 0.40070414543151855 0.5826116800308228" />'
+    # '<camera mode="fixed" name="custombirdview" pos="-1.3877787807814457e-17 0.0 1.400000000000003" quat="0.7071067690849304 0.0 0.0 0.7071067690849304" />'
+    from_tag = '<' in inp
+    cam_tree = ET.fromstring(inp) if from_tag else ET.Element("camera", attrib={"name": inp})
+    CAMERA_NAME = cam_tree.get("name")
+
+    # Create the camera mover
+    camera_mover = CameraMover(
+        env=env,
+        camera=CAMERA_NAME,
+        # init_camera_pos= (0.5029184206441294, 0, 1.0513675831326001),
+        # init_camera_quat=np.array([0.582611083984375, 0.40070417523384094, 0.40070414543151855, 0.5826116800308228]) #xyzw?
+    )
+
+    # Make sure we're using the camera that we're modifying
+    camera_id = env.sim.model.camera_name2id(CAMERA_NAME)
+    env.viewer.set_camera(camera_id=camera_id)
+    # env.viewer.set_camera(camera_id=0)
 
     # Get action limits
     # low, high = env.action_spec
@@ -100,8 +129,8 @@ if __name__ == "__main__":
     # print(env.robots[1].dof)
 
     # do visualization
-    # for i in range(2):
-    while True:
+    for i in range(2):
+    # while True:
         MTMLlistener()
         action = np.append(MTMLaction, MTMRaction)
         # print(action)
@@ -109,9 +138,10 @@ if __name__ == "__main__":
         # print(f"{obs['robot0_joint_pos_cos']=}")
         # print(f"{obs['robot0_joint_pos_sin']=}")
         # print(f"{obs['robot0_joint_vel']=}")
-        print(f"{obs['robot0_eef_pos']=}")
+        # print(f"{obs['robot0_eef_pos']=}")
         # print(f"{obs['robot0_eef_quat']=}")
         # print(f"{obs['robot0_gripper_qpos']=}")
         # print(f"{obs['robot0_gripper_qvel']=}")
         # print(f"{obs['robot0_gripper_qpos']=}")
+        # print(obs["robot0_eye_in_hand_image"].shape)
         env.render()
