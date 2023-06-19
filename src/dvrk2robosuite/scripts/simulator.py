@@ -3,33 +3,21 @@ import numpy as np
 import xml.etree.ElementTree as ET
 
 import rospy
-from dvrk2robosuite.msg import measured_js, measured_cv, measured_cp
+from dvrk2robosuite.msg import measured_js
+from geometry_msgs.msg import TransformStamped as t
 
 import robosuite as suite
 from robosuite import load_controller_config
 from robosuite.utils.camera_utils import CameraMover
 
-def MTMLcallback(data):
+def MTML2simulatorLTranslationcallback(data):
     global MTMLaction
     MTMLaction[0] = data.transform.translation.x
     MTMLaction[1] = data.transform.translation.y
     MTMLaction[2] = data.transform.translation.z
-    MTMLaction[3] = data.transform.rotation.x
-    MTMLaction[4] = data.transform.rotation.y
-    MTMLaction[5] = data.transform.rotation.z
-    # MTMLaction[6] = data.transform.rotation.w
-    # MTMLaction[0] = data.twist.linear.x
-    # MTMLaction[1] = data.twist.linear.y
-    # MTMLaction[2] = data.twist.linear.z
-    # MTMLaction[3] = data.twist.angular.x
-    # MTMLaction[4] = data.twist.angular.y
-    # MTMLaction[5] = data.twist.angular.z
 
-
-
-def MTMLlistener():
-    rospy.Subscriber("/MTML/measured_cp", measured_cp, MTMLcallback)
-    # rospy.Subscriber("/MTML/measured_cv", measured_cv, MTMLcallback)
+def MTML2simulatorLTranslationListener():
+    rospy.Subscriber('/simulator/Left/relativeTranslation', t, MTML2simulatorLTranslationcallback)
 
 def MTMLGrippercallback(data):
     global MTMLaction
@@ -37,21 +25,6 @@ def MTMLGrippercallback(data):
 
 def MTMLGripperlistener():
     rospy.Subscriber("/MTML/gripper/measured_js", measured_js, MTMLGrippercallback)
-
-def MTMRcallback(data):
-    global MTMRaction
-    for i in range(7):
-        MTMRaction[i] = data.velocity[i]
-
-def MTMRlistener():
-    rospy.Subscriber("/MTMR/measured_cv", measured_cv, MTMRcallback)
-
-def MTMRGrippercallback(data):
-    global MTMRaction
-    MTMRaction[-1] = data.velocity[0]
-
-def MTMRGripperlistener():
-    rospy.Subscriber("/MTMR/gripper/measured_cv", measured_cv, MTMRGrippercallback)
 
 # def robosuiteLeftTalker():
     # 32 float64: 14 arm joint positions (encoded using 7 sin and 7 cos), 7 arm joint velocities, 3+4 end effector pose, 2 gripper finger positions, and 2 gripper finger velocities
@@ -90,7 +63,7 @@ if __name__ == "__main__":
     env.reset()
 
     # set up camera
-    inp = "birdview"
+    inp = "frontview"
     # 'frontview' 'birdview' 'agentview' 'sideview' 
     # '<camera mode="fixed" name="customfrontview" pos="0.5029184206441294 -4.461397182381478e-07 1.0513675831326001" quat="0.582611083984375 0.40070417523384094 0.40070414543151855 0.5826116800308228" />'
     # '<camera mode="fixed" name="custombirdview" pos="-1.3877787807814457e-17 0.0 1.400000000000003" quat="0.7071067690849304 0.0 0.0 0.7071067690849304" />'
@@ -116,7 +89,8 @@ if __name__ == "__main__":
     # print(low, high)for i in range(3000):
 
     # start listening to ROS cmd
-    rospy.init_node('DVRKlistener', anonymous=False)
+    rospy.init_node('simulator', anonymous=False)
+    eefPub = rospy.Publisher('/simulator/Left/measured_cp', t, queue_size=20)
     # MTMLaction = np.zeros(env.robots[0].dof)
     # MTMRaction = np.zeros(env.robots[1].dof)
     MTMLaction = np.zeros(7) # 6 dof + gripper?
@@ -129,17 +103,32 @@ if __name__ == "__main__":
     # print(env.robots[1].dof)
 
     # do visualization
-    for i in range(2):
-    # while True:
-        MTMLlistener()
+    # for i in range(1):
+    while True:
+        MTML2simulatorLTranslationListener()
         action = np.append(MTMLaction, MTMRaction)
         # print(action)
         obs, reward, done, info = env.step(action)
         # print(f"{obs['robot0_joint_pos_cos']=}")
         # print(f"{obs['robot0_joint_pos_sin']=}")
         # print(f"{obs['robot0_joint_vel']=}")
-        # print(f"{obs['robot0_eef_pos']=}")
+        print(f"{obs['robot0_eef_pos']=}")
+        print(f"{MTMLaction=}")
+        # http://wiki.ros.org/tf2/Tutorials/Quaternions#Relative_rotations
         # print(f"{obs['robot0_eef_quat']=}")
+        simulatorT = t()
+        simulatorT.transform.translation.x = obs['robot0_eef_pos'][0]
+        simulatorT.transform.translation.y = obs['robot0_eef_pos'][1]
+        simulatorT.transform.translation.z = obs['robot0_eef_pos'][2]
+        simulatorT.transform.rotation.x = obs['robot0_eef_quat'][0]
+        simulatorT.transform.rotation.y = obs['robot0_eef_quat'][1]
+        simulatorT.transform.rotation.z = obs['robot0_eef_quat'][2]
+        simulatorT.transform.rotation.w = obs['robot0_eef_quat'][3]
+        eefPub.publish(simulatorT)
+        
+        # print(f"{np.concatenate((obs['robot0_eef_pos'], obs['robot0_eef_quat']))=}")
+        # print(MTMLaction)
+        # print()
         # print(f"{obs['robot0_gripper_qpos']=}")
         # print(f"{obs['robot0_gripper_qvel']=}")
         # print(f"{obs['robot0_gripper_qpos']=}")

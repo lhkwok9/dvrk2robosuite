@@ -33,7 +33,7 @@ Not searching for unused variables given on the command line.
 [36m--[0m catkin 0.8.10
 [36m--[0m BUILD_SHARED_LIBS is on
 [36m--[0m Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
-[36m--[0m dvrk2robosuite: 3 messages, 0 services
+[36m--[0m dvrk2robosuite: 2 messages, 0 services
 [36m--[0m Installing devel-space wrapper /home/jk/dvrk2robosuite/src/dvrk2robosuite/scripts/talker.py to /home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/lib/dvrk2robosuite
 [36m--[0m Installing devel-space wrapper /home/jk/dvrk2robosuite/src/dvrk2robosuite/scripts/listener.py to /home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/lib/dvrk2robosuite
 [36m--[0m Configuring done

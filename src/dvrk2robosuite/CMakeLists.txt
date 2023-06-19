@@ -53,7 +53,7 @@ add_message_files(
   FILES
   measured_js.msg
   measured_cv.msg
-  measured_cp.msg
+#  measured_cp.msg
 )
 
 ## Generate services in the 'srv' folder

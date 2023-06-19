@@ -132,7 +132,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/dvrk2robosuite/msg" TYPE FILE FILES
     "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_js.msg"
     "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_cv.msg"
-    "/home/jk/dvrk2robosuite/src/dvrk2robosuite/msg/measured_cp.msg"
     )
 endif()
 

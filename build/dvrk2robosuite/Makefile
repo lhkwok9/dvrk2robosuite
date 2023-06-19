@@ -662,19 +662,6 @@ _dvrk2robosuite_generate_messages_check_deps_measured_cv/fast:
 .PHONY : _dvrk2robosuite_generate_messages_check_deps_measured_cv/fast
 
 #=============================================================================
-# Target rules for targets named _dvrk2robosuite_generate_messages_check_deps_measured_cp
-
-# Build rule for target.
-_dvrk2robosuite_generate_messages_check_deps_measured_cp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _dvrk2robosuite_generate_messages_check_deps_measured_cp
-.PHONY : _dvrk2robosuite_generate_messages_check_deps_measured_cp
-
-# fast build rule for target.
-_dvrk2robosuite_generate_messages_check_deps_measured_cp/fast:
-	$(MAKE) -f CMakeFiles/_dvrk2robosuite_generate_messages_check_deps_measured_cp.dir/build.make CMakeFiles/_dvrk2robosuite_generate_messages_check_deps_measured_cp.dir/build
-.PHONY : _dvrk2robosuite_generate_messages_check_deps_measured_cp/fast
-
-#=============================================================================
 # Target rules for targets named gmock_main
 
 # Build rule for target.
@@ -777,7 +764,6 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... doxygen"
 	@echo "... _dvrk2robosuite_generate_messages_check_deps_measured_cv"
-	@echo "... _dvrk2robosuite_generate_messages_check_deps_measured_cp"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"

@@ -1,1 +1,0 @@
-/home/jk/dvrk2robosuite/devel/.private/dvrk2robosuite/share/common-lisp/ros/dvrk2robosuite/msg/_package_measured_cp.lisp
