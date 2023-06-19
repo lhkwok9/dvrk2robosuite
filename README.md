@@ -32,7 +32,7 @@ export ROS_MASTER_URI=http://192.168.3.200:11311
 export ROS_IP=192.168.3.199  
 source devel/setup.bash  
 export MUJOCO_GL="osmesa"
-rosrun dvrk2robosuite ros_keyboard.py  
+rosrun dvrk2robosuite simulator.py  
 ```
 
 ## Second terminal (Example cmd)
@@ -46,4 +46,7 @@ rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position:
 roscd dvrk2robosuite/   
 rostopic type /MTML/measured_js | rosmsg show
 rostopic echo /MTMR/gripper/measured_js
+conda activate robosuite  
+source devel/setup.bash  
+rosrun dvrk2robosuite simulator.py  
 ```
