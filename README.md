@@ -35,10 +35,19 @@ export MUJOCO_GL="osmesa"
 rosrun dvrk2robosuite simulator.py  
 ```
 
-## Second terminal (Example cmd)
+## Second terminal
 ```bash
-rostopic pub -1 /MTML/measured_cp dvrk2robosuite/measured_cp
-rostopic pub -1 /MTML/gripper/measured_js dvrk2robosuite/measured_js '{position: [0.0], velocity: [0.0]}'  
+cd ~/dvrk2robosuite  
+conda activate robosuite  
+export ROS_MASTER_URI=http://192.168.3.200:11311  
+export ROS_IP=192.168.3.199  
+source devel/setup.bash  
+rosrun dvrk2robosuite leftTranslation.py  
+```
+
+## Third terminal (Example cmd)
+```bash
+rostopic pub -1 /MTML/measured_cp geometry_msgs/TransformStamped
 ```
 
 ## Useful cmd
