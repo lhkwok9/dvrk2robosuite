@@ -14,6 +14,17 @@ def MTMLcallback(data):
 def MTMLlistener():
     rospy.Subscriber("/MTML/measured_cp", t, MTMLcallback)
 
+def MTMLDifferencecallback(data):
+    global MTMLCurrentTranslation
+    global MTMLPreviousTranslation
+    global MTMLDeltaTranslation
+    MTMLDeltaTranslation = MTMLCurrentTranslation - MTMLPreviousTranslation
+    MTMLPreviousTranslation = MTMLCurrentTranslation
+    
+def MTMLDifferencelistener():
+    rospy.Subscriber("/MTML/measured_cp", t, MTMLcallback)
+    
+
 def simulatorLcallback(data):
     global simulatorLTranslation
     simulatorLTranslation[0] = data.transform.translation.x
