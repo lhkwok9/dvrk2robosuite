@@ -26,7 +26,7 @@ controller_setting_fpath = os.path.join( os.path.dirname( os.path.dirname( os.pa
 controller_config = load_controller_config(custom_fpath=controller_setting_fpath)
 
 config = {
-    "env_name": "Lift", #NutAssemblySingle PickPlace
+    "env_name": "PickPlaceCan", #NutAssemblySingle PickPlace
     "robots": "Panda",
     "controller_configs": controller_config,
 }
@@ -38,7 +38,7 @@ tele_config = {
 }
 
 # data collection dir
-data_directory = os.path.join( os.path.dirname( os.path.dirname( os.path.abspath(__file__) ) ), 'data_collection_test', config['env_name']) # data_collection
+data_directory = os.path.join( os.path.dirname( os.path.dirname( os.path.abspath(__file__) ) ), 'data_collection_distribution', config['env_name']) # data_collection
 
 class Simulator:
     
